@@ -1,7 +1,7 @@
+import path from 'node:path';
+
 import { Router } from 'express';
 import multer from 'multer';
-import path from 'node:path';
-import express from 'express';
 
 import { createCategory } from './app/useCases/categories/createCategories';
 import { listCategories } from './app/useCases/categories/listCategories';
@@ -14,10 +14,6 @@ import { changeOrderStatus } from './app/useCases/orders/changeOrderStatus';
 import { cancelOrder } from './app/useCases/orders/cancelOrder';
 
 export const router = Router();
-const app = express();
-
-app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
-
 
 const upload = multer({
   storage: multer.diskStorage({
@@ -26,28 +22,33 @@ const upload = multer({
     },
     filename(req, file, callback) {
       callback(null, `${Date.now()}-${file.originalname}`);
-    }
+    },
   })
 });
 
+// list categories
 router.get('/categories', listCategories);
 
+//create categorys
 router.post('/categories', createCategory);
 
+//list products
 router.get('/products', listProducts);
 
+//create product
 router.post('/products', upload.single('image'), createProduct);
 
-
+//get products by category
 router.get('/categories/:categoryId/products', listProcutsByCategory);
 
-
+//list orders
 router.get('/orders', listOrders);
 
+//create order
 router.post('/orders', createOrder);
 
+//change order status
 router.patch('/orders/:orderId', changeOrderStatus);
 
+// delete/cancel order
 router.delete('/orders/:orderId', cancelOrder);
-
-
