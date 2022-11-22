@@ -30,12 +30,40 @@ const orders : Order[] = [
     ],
   }
 ];
+const orders2 : Order[] = [
+  {
+    '_id': '6374255194d674054e642c85',
+    'table': '1',
+    'status': 'IN_PRODUCTION',
+    'products': [
+      {
+        'product': {
+          'name': 'Coca Cola',
+          'imagePath': '1668476296123-coca-cola.png',
+          'price': 5,
+        },
+        'quantity': 3,
+        '_id': '6374255194d674054e642c86'
+      },
+      {
+        'product': {
+          'name': 'Pizza quatro queijos',
+          'imagePath': '1668474892533-quatro-queijos.png',
+          'price': 40,
+
+        },
+        'quantity': 3,
+        '_id': '6374255194d674054e642c87'
+      }
+    ],
+  }
+];
 
 export function Orders(){
   return (
     <Container>
       <OrdersBoards icon = "🕑" title = "Fila de Espera" orders={orders}/>
-      <OrdersBoards icon = "👩‍🍳" title = "Em produção" orders={[]}/>
+      <OrdersBoards icon = "👩‍🍳" title = "Em produção" orders={orders2}/>
       <OrdersBoards icon = "✅" title = "Pronto!" orders = {[]}/>
     </Container>
   );
