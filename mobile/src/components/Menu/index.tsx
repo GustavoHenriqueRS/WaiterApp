@@ -1,7 +1,9 @@
 import { FlatList } from 'react-native';
 import { products } from '../../mocks/products';
 import { Text } from '../Text';
-import { Product , Image, Productdetails} from './styles';
+import { Product , ProductImage, Productdetails, Separator, AddToCartButton} from './styles';
+import { FormatCurrency, LocalHostPort } from '../../utils/api';
+import { PlusCircle } from '../Icons/PlusCircle';
 
 export function Menu(){
   return(
@@ -10,16 +12,24 @@ export function Menu(){
       contentContainerStyle = {{ paddingHorizontal : 24}}
       data = {products}
       keyExtractor = {products => products._id}
-      renderItem ={({item : product}) => (
+      ItemSeparatorComponent = {Separator}
+      renderItem ={({item}) => (
         <Product>
-          <Image source={{
-            uri : `http://172.29.34.147:3001/uploads/${product.imagePath}`,
-          }}/>
+          <ProductImage
+            source={{
+              uri: `http://${LocalHostPort}/uploads/${item.imagePath}`,
+            }}
+          />
           <Productdetails>
-            <Text>{product.name}</Text>
-            <Text>{product.description}</Text>
-            <Text>{product.price}</Text>
+            <Text weight='600'>{item.name}</Text>
+            <Text size={14} color='#666' style = {{
+              marginVertical: 8
+            }}>{item.description}</Text>
+            <Text size={14} weight = '600'>{FormatCurrency(item.price)}</Text>
           </Productdetails>
+          <AddToCartButton>
+            <PlusCircle/>
+          </AddToCartButton>
         </Product>
       )}/>
   );

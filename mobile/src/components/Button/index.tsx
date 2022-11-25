@@ -2,15 +2,15 @@ import { Text } from '../Text';
 import { Container } from './styles';
 
 interface ButtonProps{
-  label : string;
-  onPress : () => void;
+  children : string;
+  onPress : () =>  void | string;
   disabled?: boolean;
 }
 
-export function Button({label, onPress, disabled}: ButtonProps){
+export function Button({children, onPress, disabled}: ButtonProps){
   return(
     <Container onPress={onPress} disabled= {disabled}>
-      <Text weight='600' color='#ffffff'>{label}</Text>
+      <Text weight='600' color='#ffffff'>{children}</Text>
     </Container>
   );
 }

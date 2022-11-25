@@ -1,7 +1,7 @@
 import { useFonts } from 'expo-font';
 import { Main } from './src/Main';
-
-
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
 export default function App() {
 
 
